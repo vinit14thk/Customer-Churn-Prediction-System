@@ -286,3 +286,71 @@ plt.tight_layout()
 plt.savefig("confusion_matrix.png")
 
 plt.show()
+
+# ==============================
+# IMPROVED MODEL EVALUATION
+# ==============================
+
+from sklearn.ensemble import RandomForestClassifier
+
+improved_model = Pipeline(
+    steps=[
+        ("preprocessor", preprocessor),
+        (
+            "classifier",
+            RandomForestClassifier(
+                n_estimators=300,
+                class_weight="balanced",
+                max_depth=12,
+                min_samples_split=5,
+                random_state=42
+            )
+        )
+    ]
+)
+
+# Train improved model
+improved_model.fit(X_train, y_train)
+
+# Predictions
+improved_predictions = improved_model.predict(X_test)
+
+# Evaluation
+improved_accuracy = accuracy_score(
+    y_test,
+    improved_predictions
+)
+
+improved_precision = precision_score(
+    y_test,
+    improved_predictions
+)
+
+improved_recall = recall_score(
+    y_test,
+    improved_predictions
+)
+
+improved_f1 = f1_score(
+    y_test,
+    improved_predictions
+)
+
+print("\nImproved Model Performance")
+print("=" * 40)
+
+print(
+    f"Accuracy:  {improved_accuracy * 100:.2f}%"
+)
+
+print(
+    f"Precision: {improved_precision * 100:.2f}%"
+)
+
+print(
+    f"Recall:    {improved_recall * 100:.2f}%"
+)
+
+print(
+    f"F1 Score:  {improved_f1 * 100:.2f}%"
+)
