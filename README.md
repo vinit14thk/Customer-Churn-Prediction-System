@@ -170,6 +170,28 @@ These results represent the initial model configuration and provide a baseline f
 
 
 
+After evaluating the baseline model, the Random Forest configuration was improved using class balancing and additional hyperparameters.
+
+
+
+| Metric | Baseline | Improved |
+
+|---|---:|---:|
+
+| Accuracy | 75.80% | 66.50% |
+
+| Precision | 46.67% | 35.96% |
+
+| Recall | 20.85% | 54.47% |
+
+| F1 Score | 28.82% | 43.32% |
+
+
+
+The improved model substantially increased recall and F1 score, making it better suited for identifying customers who may be at risk of churn. This comes with a trade-off in overall accuracy and precision.
+
+
+
 \## Risk Analysis
 
 
