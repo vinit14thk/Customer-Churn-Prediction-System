@@ -124,6 +124,12 @@ df["Risk_Level"] = pd.cut(
     labels=["Low", "Medium", "High"]
 )
 
+# Save predictions for all customers
+df.to_csv("customer_churn_predictions.csv", index=False)
+
+print("All customer predictions saved to:")
+print("customer_churn_predictions.csv")
+
 # Save high-risk customers
 
 high_risk_customers = df[
@@ -354,3 +360,33 @@ print(
 print(
     f"F1 Score:  {improved_f1 * 100:.2f}%"
 )
+
+# Compare both models
+print("\nMODEL COMPARISON")
+print("=" * 45)
+
+print(f"{'Metric':<15}{'Original':>12}{'Improved':>12}")
+print("-" * 39)
+
+metrics = [
+    ("Accuracy", accuracy, improved_accuracy),
+    ("Precision", precision, improved_precision),
+    ("Recall", recall, improved_recall),
+    ("F1 Score", f1, improved_f1),
+]
+
+for name, original, improved in metrics:
+    print(
+        f"{name:<15}{original * 100:>11.2f}%"
+        f"{improved * 100:>11.2f}%"
+    )
+
+# Save comparison results
+comparison = pd.DataFrame(
+    metrics,
+    columns=["Metric", "Original_Model", "Improved_Model"]
+)
+
+comparison.to_csv("model_comparison.csv", index=False)
+
+print("\nComparison saved to model_comparison.csv")
