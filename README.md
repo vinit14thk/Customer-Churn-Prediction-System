@@ -1,320 +1,158 @@
-\# Customer Churn Prediction \& Business Analytics System
+Customer Churn Prediction & Business Analytics System
 
+An end-to-end machine learning project that analyzes customer characteristics, estimates churn risk, and identifies customers who may benefit from retention efforts.
 
+This project uses synthetic customer data to demonstrate a practical machine learning and business analytics workflow.
 
-\## Overview
+Project Objectives
 
+- Analyze customer characteristics and behavior.
+- Predict customer churn using a Random Forest classifier.
+- Estimate churn probabilities and categorize customer risk.
+- Identify high-risk customers for potential retention efforts.
+- Compare baseline and class-balanced models.
+- Evaluate performance using accuracy, precision, recall, and F1 score.
+- Generate visualizations and export prediction reports.
 
+Technologies Used
 
-A machine learning-based customer churn prediction system that analyzes customer behavior, predicts the likelihood of churn, and identifies high-risk customers for potential retention efforts.
+- Python
+- Pandas and NumPy
+- Scikit-learn
+- Matplotlib and Seaborn
+- Random Forest Classification
+- Git and GitHub
 
+Dataset
 
-
-The project uses a synthetic customer dataset and a Random Forest classification model to demonstrate an end-to-end machine learning workflow.
-
-
-
-\## Problem Statement
-
-
-
-Customer churn is an important business problem because losing customers can reduce revenue and increase customer acquisition costs.
-
-
-
-This project aims to:
-
-
-
-\- Analyze customer characteristics and behavior
-
-\- Predict whether a customer is likely to churn
-
-\- Estimate churn probability
-
-\- Classify customers into risk levels
-
-\- Identify high-risk customers
-
-\- Evaluate machine learning model performance
-
-\- Generate business-oriented visualizations
-
-
-
-\## Technologies Used
-
-
-
-\- Python
-
-\- Pandas
-
-\- NumPy
-
-\- Scikit-learn
-
-\- Matplotlib
-
-\- Seaborn
-
-\- Random Forest
-
-\- Git \& GitHub
-
-
-
-\## Dataset
-
-
-
-The project uses a synthetic dataset containing \*5,000 customer records\*.
-
-
+The project uses 5,000 synthetic customer records, generated using "generate_data.py".
 
 Features include:
 
+- Customer ID
+- Age
+- Tenure in months
+- Monthly charges
+- Number of support calls
+- Contract length
+- Internet service type
+- Churn status
 
+The dataset is intended for educational and portfolio demonstration, not for drawing conclusions about real customers.
 
-\- Customer ID
+Machine Learning Workflow
 
-\- Age
+1. Generate synthetic customer data.
+2. Load the dataset and select model features.
+3. Split the data into training and testing sets (80%/20%).
+4. Encode the categorical internet-service feature.
+5. Train a Random Forest classifier.
+6. Evaluate predictions on the test set.
+7. Calculate churn scores and categorize risk levels.
+8. Export customer predictions and high-risk customer reports.
+9. Train a class-balanced Random Forest configuration.
+10. Compare model evaluation metrics and generate visualizations.
 
-\- Tenure in months
+Model Performance
 
-\- Monthly charges
+The following results were produced by the current script using the same test split.
 
-\- Number of support calls
+Metric| Baseline Model| Class-Balanced Model
+Accuracy| 75.80%| 66.50%
+Precision| 46.67%| 35.96%
+Recall| 20.85%| 54.47%
+F1 Score| 28.82%| 43.32%
 
-\- Contract length
+The class-balanced model has higher recall and F1 score but lower accuracy and precision. This illustrates the trade-off between detecting more churn cases and producing more false-positive alerts.
 
-\- Internet service type
+These results are from a synthetic dataset and a single train/test split. They do not establish real-world predictive performance.
 
-\- Churn status
+Customer Risk Analysis
 
+Each customer receives a model-generated churn score and a risk category:
 
+- Low Risk
+- Medium Risk
+- High Risk
 
-The dataset is generated programmatically using generate\_data.py.
+The project exports high-risk customers to a separate CSV report for further analysis.
 
+A predicted score is an estimate produced by the model, not a guarantee that a customer will leave. The scores have not been established as calibrated real-world probabilities.
 
+Generated Reports
 
-\## Machine Learning Methodology
+- "customer_churn_predictions.csv" — customer records with predicted churn scores and risk levels.
+- "high_risk_customers.csv" — customers classified as high risk.
+- "model_comparison.csv" — baseline and class-balanced model metrics.
 
+Visualizations
 
+Churn Distribution
 
-The system follows these steps:
+"Churn Distribution" (churn_distribution.png)
 
+Monthly Charges by Churn Status
 
+"Monthly Charges vs Churn" (monthly_charges_vs_churn.png)
 
-1\. Generate synthetic customer data
+Churn Rate by Contract Length
 
-2\. Load and preprocess the dataset
+"Churn by Contract Length" (churn_by_contract_length.png)
 
-3\. Separate features and target variable
+Churn Rate by Support Calls
 
-4\. Split the data into training and testing sets
+"Churn by Support Calls" (churn_by_support_calls.png)
 
-5\. Encode categorical features
+Confusion Matrix
 
-6\. Train a Random Forest classification model
+"Confusion Matrix" (confusion_matrix.png)
 
-7\. Predict customer churn
-
-8\. Evaluate model performance
-
-9\. Calculate churn probabilities
-
-10\. Identify high-risk customers
-
-11\. Generate analytical visualizations
-
-
-
-\## Model
-
-
-
-The project uses a \*Random Forest Classifier\* with 200 decision trees.
-
-
-
-The dataset is divided into:
-
-
-
-\- 80% training data
-
-\- 20% testing data
-
-
-
-\### Initial Model Performance
-
-
-
-| Metric | Score |
-
-|---|---:|
-
-| Accuracy | 75.80% |
-
-| Precision | 46.67% |
-
-| Recall | 20.85% |
-
-| F1 Score | 28.82% |
-
-
-
-These results represent the initial model configuration and provide a baseline for future model improvement.
-
-
-
-After evaluating the baseline model, the Random Forest configuration was improved using class balancing and additional hyperparameters.
-
-
-
-| Metric | Baseline | Improved |
-
-|---|---:|---:|
-
-| Accuracy | 75.80% | 66.50% |
-
-| Precision | 46.67% | 35.96% |
-
-| Recall | 20.85% | 54.47% |
-
-| F1 Score | 28.82% | 43.32% |
-
-
-
-The improved model substantially increased recall and F1 score, making it better suited for identifying customers who may be at risk of churn. This comes with a trade-off in overall accuracy and precision.
-
-
-
-\## Risk Analysis
-
-
-
-The system calculates a churn probability for every customer.
-
-
-
-Customers are categorized into:
-
-
-
-\- \*Low Risk\*
-
-\- \*Medium Risk\*
-
-\- \*High Risk\*
-
-
-
-A separate high\_risk\_customers.csv file is generated containing customers classified as high risk.
-
-
-
-The churn probability is a model-generated risk estimate and should not be interpreted as a guaranteed probability of customer departure.
-
-
-
-\## Visualizations
-
-
-
-\### Churned vs Non-Churned Customers
-
-
-
-Shows the distribution of customers who stayed versus customers who churned.
-
-
-
-!\[Churn Distribution](churn\_distribution.png)
-
-
-
-\### Monthly Charges vs Churn
-
-
-
-Compares monthly charge distributions between customers who stayed and customers who churned.
-
-
-
-!\[Monthly Charges vs Churn](monthly\_charges\_vs\_churn.png)
-
-
-
-\### Churn Rate by Contract Length
-
-
-
-Shows how churn rates vary across different contract lengths.
-
-
-
-!\[Churn by Contract Length](churn\_by\_contract\_length.png)
-
-
-
-\### Churn Rate by Support Calls
-
-
-
-Shows the relationship between the number of support calls and customer churn rate.
-
-
-
-!\[Churn by Support Calls](churn\_by\_support\_calls.png)
-
-
-
-\### Confusion Matrix
-
-
-
-Shows correct and incorrect model predictions on the test dataset.
-
-
-
-!\[Confusion Matrix](confusion\_matrix.png)
-
-
-
-\## Project Structure
-
-
-
-```text
+Project Structure
 
 Customer-Churn-Prediction-System/
-
-│
-
-├── customer\_churn\_data.csv
-
-├── high\_risk\_customers.csv
-
-├── generate\_data.py
-
-├── churn\_prediction.py
-
-├── churn\_distribution.png
-
-├── monthly\_charges\_vs\_churn.png
-
-├── churn\_by\_contract\_length.png
-
-├── churn\_by\_support\_calls.png
-
-├── confusion\_matrix.png
-
+├── customer_churn_data.csv
+├── customer_churn_predictions.csv
+├── high_risk_customers.csv
+├── model_comparison.csv
+├── generate_data.py
+├── churn_prediction.py
+├── churn_distribution.png
+├── monthly_charges_vs_churn.png
+├── churn_by_contract_length.png
+├── churn_by_support_calls.png
+├── confusion_matrix.png
 ├── requirements.txt
-
 ├── .gitignore
-
 └── README.md
 
+Installation and Usage
+
+Run these commands in PowerShell from the project directory.
+
+1. Install dependencies
+
+python -m pip install -r requirements.txt
+
+2. Generate the synthetic dataset
+
+python generate_data.py
+
+3. Run the prediction system
+
+python churn_prediction.py
+
+The script trains both model configurations, prints evaluation metrics, saves customer prediction reports, and generates visualizations.
+
+Note: If your "requirements.txt" includes the libraries used by the project, the installation command will install them. The generated output files may be overwritten when the script runs again.
+
+Limitations and Responsible Use
+
+- The dataset is synthetic and may not reflect real customer behavior.
+- Performance is measured on one train/test split.
+- Churn scores should not be treated as calibrated probabilities without further validation.
+- High-risk classifications should support investigation, not automatically determine customer treatment.
+- Additional validation, threshold tuning, and testing on representative real-world data would be required before practical deployment.
+
+Author
+
+Developed as a machine learning and business analytics portfolio project.
